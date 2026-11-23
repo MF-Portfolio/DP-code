@@ -1,0 +1,30 @@
+{
+  "seed": 2026,
+  "data": "data/df.pkl",
+  "target": {
+    "event": ["exitus letalis", "ARO/OAIM"],
+    "nonevent": ["prepustenie amb. star."],
+    "transferred": "preložený",
+    "transferred_handling": {"main": "exclude", "sensitivity_A": "nonevent", "sensitivity_B": "event"}
+  },
+  "train_wave": 1,
+  "test_waves": [2, 3, 4],
+  "max_na": 0.5,
+  "outer_folds": 5,
+  "inner_folds": 5,
+  "n_iter": 40,
+  "tuning_metric": "neg_log_loss",
+  "bootstrap_B": 1000,
+  "bootstrap_B_skupiny": 2000,
+  "bootstrap_B_rekalibracia": 1000,
+  "comparisons": {
+    "muži − ženy": ["pohlavie", "muži", "ženy"],
+    "vek > 80 − vek 66–80": ["vek_kat", ">80", "66–80"],
+    "DM áno − DM nie": ["diabetes", "áno", "nie"]
+  },
+  "holm_families": {
+    "H2": "pre každý model 9 testov: 3 porovnania × vlny 2, 3, 4; H0: CITL_A − CITL_B = 0",
+    "H3": "pre každý model 3 testy: 3 porovnania; H0: (CITL4 − CITL2)_A − (CITL4 − CITL2)_B = 0"
+  },
+  "recalibration": {"transitions": [[2, 3], [3, 4]], "methods": ["none", "intercept", "intercept_slope"]}
+}
